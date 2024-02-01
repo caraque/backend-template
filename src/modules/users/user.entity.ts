@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -11,11 +11,11 @@ export class User {
   @Column({ length: 50 })
   lastName: string;
 
-  @Column({ length: 150, type: 'string' })
+  @Column({ length: 150, type: 'varchar', unique: true })
   email: string;
 
-  @Column({ length: 150, type: 'text' })
-  password: string;
+  @Column({ length: 150, type: 'varchar' })
+  password?: string;
 
   @Column({ type: 'boolean', default: false })
   isAdmin: boolean;

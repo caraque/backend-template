@@ -29,7 +29,6 @@ export class CreateUserDto {
   password: string;
 
   @IsBoolean()
-  @MaxLength(150)
   @IsNotEmpty()
   isAdmin: boolean;
 }
@@ -50,8 +49,12 @@ export class UpdateUserDto {
   @IsNotEmpty()
   email: string;
 
-  @IsBoolean()
+  @IsString()
   @MaxLength(150)
+  @IsNotEmpty()
+  password: string;
+
+  @IsBoolean()
   @IsNotEmpty()
   isAdmin: boolean;
 }

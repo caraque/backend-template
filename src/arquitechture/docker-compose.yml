@@ -5,11 +5,12 @@ services:
     image: mysql:8.0.28
     container_name: mysql
     restart: always
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: my_database
-      MYSQL_USER: my_user
-      MYSQL_PASSWORD: my_password
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: backend_database
+      MYSQL_USER: christian
+      MYSQL_PASSWORD: 1234567890
       allowPublicKeyRetrieval: true
     ports:
       - "3306:3306"
