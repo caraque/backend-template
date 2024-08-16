@@ -7,15 +7,22 @@ import * as pkg from '../package.json';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
-
   const swaggerConf = new DocumentBuilder()
     .setTitle(pkg.name)
     .setDescription(pkg.description)
     .setVersion('1.0')
     .addTag(pkg.name)
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'Authorization',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConf);
   SwaggerModule.setup('api', app, document);
+  app.enableCors({
+    origin: '*', // or specify the domains
+    allowedHeaders: ['Authorization', 'Content-Type' /*...*/],
+  });
   await app.listen(3000);
 }
 

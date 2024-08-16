@@ -15,15 +15,15 @@ import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
 import { User } from './user.entity';
 import userSecurityMapper from '../../utils/userSecurityMapper';
 import { AuthGuard } from '../auth/auth.guard';
-import { ApiCreatedResponse, ApiHeader, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiResponse,
+} from '@nestjs/swagger';
 import { InternalError } from '../entities/internal-error.entity';
 
 @Controller('users')
-@ApiHeader({
-  name: 'Authorization',
-  required: true,
-  description: 'Bearer token',
-})
+@ApiBearerAuth('Authorization')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
